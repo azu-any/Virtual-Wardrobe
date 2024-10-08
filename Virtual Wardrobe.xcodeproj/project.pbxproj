@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		DBCE83312CB561B300EC7D93 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = DBCE83302CB561AB00EC7D93 /* .gitignore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		DBCE831F2CB55D1100EC7D93 /* Virtual Wardrobe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Virtual Wardrobe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBCE83302CB561AB00EC7D93 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +37,7 @@
 		DBCE83162CB55D1100EC7D93 = {
 			isa = PBXGroup;
 			children = (
+				DBCE83302CB561AB00EC7D93 /* .gitignore */,
 				DBCE83212CB55D1100EC7D93 /* Virtual Wardrobe */,
 				DBCE83202CB55D1100EC7D93 /* Products */,
 			);
@@ -109,6 +115,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBCE83312CB561B300EC7D93 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
