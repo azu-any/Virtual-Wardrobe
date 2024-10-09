@@ -22,6 +22,7 @@ struct ContentView: View {
                         Text("Wardrobe")
                     }
             }
+            .accentColor(Color.main)
         }
 
 }

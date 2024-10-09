@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct WardrobeView: View {
+    
+    @State private var showAddClothesView = false
+    
     var body: some View {
         NavigationStack{
             ScrollView {
@@ -25,7 +28,7 @@ struct WardrobeView: View {
                 .toolbar(content: {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
-                            
+                            showAddClothesView.toggle()
                         } label: {
                             Image(systemName: "plus.circle")
                         }
@@ -36,6 +39,7 @@ struct WardrobeView: View {
                 .navigationTitle("Wardrobe")
             }
         }
+        .sheet(isPresented: $showAddClothesView, content: {AddClothesView(showAddClothesView: $showAddClothesView)})
     }
 }
 
