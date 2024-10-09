@@ -16,7 +16,7 @@ struct ContentView: View {
                         Text("Style")
                     }
                 
-                Wardrobe()
+                WardrobeView()
                     .tabItem {
                         Image(systemName: "tshirt.fill")
                         Text("Wardrobe")
