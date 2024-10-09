@@ -11,6 +11,7 @@ struct ClothesRowView: View {
     let categoryName: String
     let subCategories: [String]
     @State var selectedSubCategory: String
+    var action: () -> Void
     
     
     var body: some View {
@@ -26,24 +27,41 @@ struct ClothesRowView: View {
                 }
                 Spacer()
                 
-                Circle()
-                    .fill(Color.main)
-                    .frame(width: 25)
-                    .overlay {
-                        Image(systemName: "chevron.right")
-                            .foregroundStyle(.white)
-                    }
+                
+                
+                Button {
+                    action()
+                } label: {
+                    Circle()
+                        .fill(Color.main)
+                        .frame(width: 25)
+                        .overlay {
+                            Image(systemName: "chevron.right")
+                                .foregroundStyle(.white)
+                        }
+                }
+
             }
-            HStack{
-                ScrollView(.horizontal){
-                    
+            .padding(.horizontal)
+            
+            ScrollView(.horizontal, showsIndicators: false){
+                HStack{
+                    ForEach(1...8, id:\.self){ _ in
+                        ClothesCardView(imageName: "mockup_shirt", isSelected: false)
+                            .padding(1)
+                    }
                 }
             }
+            .padding(.leading)
+            
         }
+        
     }
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    ClothesRowView(categoryName: "Top", subCategories: ["T-Shirts","T-Shorts"], selectedSubCategory: "T-Shirts")
-        .padding()
+    ZStack{
+        Color.gray.opacity(0.1).ignoresSafeArea()
+        ClothesRowView(categoryName: "Top", subCategories: ["T-Shirts","T-Shorts"], selectedSubCategory: "T-Shirts", action: {})
+    }
 }
