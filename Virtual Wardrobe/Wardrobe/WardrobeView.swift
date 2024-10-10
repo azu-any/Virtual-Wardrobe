@@ -14,14 +14,13 @@ struct WardrobeView: View {
     var body: some View {
         NavigationStack{
             ScrollView {
-                VStack{
+                VStack(spacing: 30){
                     
                     ClothesRowView(categoryName: "Top", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
-                    ClothesRowView(categoryName: "Top", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
-                    ClothesRowView(categoryName: "Top", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
-                    ClothesRowView(categoryName: "Top", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
-                    ClothesRowView(categoryName: "Top", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
-                    ClothesRowView(categoryName: "Top", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
+                    ClothesRowView(categoryName: "Bottom", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
+                    ClothesRowView(categoryName: "Footwear", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
+                    ClothesRowView(categoryName: "Accessories", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
+
                     
                     
                 }
