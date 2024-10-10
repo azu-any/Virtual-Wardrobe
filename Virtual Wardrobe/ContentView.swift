@@ -1,22 +1,30 @@
-//
-//  ContentView.swift
-//  Virtual Wardrobe
-//
-//  Created by Azuany Mila on 08/10/24.
-//
-
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        
+            TabView {
+                Calender()
+                    .tabItem {
+                        Image(systemName: "calendar")
+                        Text("Calendar")
+                    }
+                
+                Style()
+                    .tabItem {
+                        Image(systemName: "star.fill")
+                        Text("Style")
+                    }
+                
+                WardrobeView()
+                    .tabItem {
+                        Image(systemName: "tshirt.fill")
+                        Text("Wardrobe")
+                    }
+            }
+            .accentColor(Color.main)
         }
-        .padding()
-    }
+
 }
 
 #Preview {
