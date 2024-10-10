@@ -1,10 +1,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var selectedDay: Date = Date()
+    
     var body: some View {
         
             TabView {
-                Calender()
+                CalendarView(selectedDay: $selectedDay)
                     .tabItem {
                         Image(systemName: "calendar")
                         Text("Calendar")
