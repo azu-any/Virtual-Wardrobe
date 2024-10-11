@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Styleview: View {
+struct StyleView: View {
     @State private var isToggled: Bool = true
 
     var body: some View {
@@ -63,7 +63,7 @@ struct Styleview: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        Styleview()
+        StyleView()
     }
 }
 
