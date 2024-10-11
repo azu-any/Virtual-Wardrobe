@@ -13,12 +13,6 @@ struct ContentView: View {
                         Text("Calendar")
                     }
                 
-                Style()
-                    .tabItem {
-                        Image(systemName: "star.fill")
-                        Text("Style")
-                    }
-                
                 WardrobeView()
                     .tabItem {
                         Image(systemName: "tshirt.fill")
