@@ -64,9 +64,10 @@ public struct WeekView: View {
                                             .frame(height: circleHeight)
                                     }
                                     
-                                    Text(date.formatted(.dateTime.day(/*.twoDigits*/)))
+                                    Text(date.formatted(.dateTime.day()))
                                         .frame(maxWidth: .infinity)
-                                        .foregroundColor(date.isToday || date.isSameDay(with: selectedDay) ? accentTextColor : defaultTextColor)
+                                        //.foregroundColor(.foreground)
+                                        .foregroundColor(date.isToday || date.isSameDay(with: selectedDay) ? .foreground : defaultTextColor)
                                 }
                             }
                     }.onTapGesture {
