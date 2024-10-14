@@ -12,19 +12,6 @@ struct StyleView: View {
 
     var body: some View {
         ZStack {
-            VStack(alignment: .leading) {
-                Text("Style")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.primary)
-                    .padding(.top, 80)
-                    .padding(.leading, 10)
-                
-                Divider()
-                    .padding(.leading, 1)
-                
-                Spacer()
-            }
             VStack(spacing: 40){
                 HStack {
                     Text("Accessories")

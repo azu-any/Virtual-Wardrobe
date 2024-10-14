@@ -33,11 +33,12 @@ struct ClothesRowView: View {
                     action()
                 } label: {
                     Circle()
-                        .fill(Color.main)
+                        .stroke(lineWidth: 2)
                         .frame(width: 25)
                         .overlay {
                             Image(systemName: "chevron.right")
-                                .foregroundStyle(.white)
+                                .foregroundStyle(.main)
+                                .bold()
                         }
                 }
 
