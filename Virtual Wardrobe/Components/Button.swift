@@ -13,7 +13,7 @@ struct MainButton: ButtonStyle {
             .frame(maxWidth: .infinity)
             .padding()
             .background(Color.main)
-            .foregroundStyle(.white)
+            .foregroundColor(.foreground)
             .clipShape(RoundedRectangle(cornerRadius: 8))
             .padding(.horizontal, 20)
             .padding(.vertical, 0)
@@ -24,8 +24,9 @@ struct MainLabel: LabelStyle {
     func makeBody(configuration: Configuration) -> some View {
         HStack {
                 configuration.icon
-                    .foregroundColor(.secondary)
-                configuration.title
+                    .foregroundColor(.main)
+            configuration.title.bold()
+                .foregroundColor(.main)
                 }
             .frame(maxWidth: .infinity)
             .padding()

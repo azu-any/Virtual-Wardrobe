@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct Virtual_WardrobeApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .modelContainer(for: Clothe.self)
+                .modelContainer(for: Outfit.self)
         }
     }
 }

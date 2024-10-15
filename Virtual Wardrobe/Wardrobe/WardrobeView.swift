@@ -6,41 +6,82 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct WardrobeView: View {
-    
+    @Environment(\.modelContext) private var context
     @State private var showAddClothesView = false
+    @State private var showingSheet = false
+    
+    @Query var clothes: [Clothe]
+    
     
     var body: some View {
         NavigationStack{
-            ScrollView {
-                VStack{
-                    
-                    ClothesRowView(categoryName: "Top", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
-                    ClothesRowView(categoryName: "Top", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
-                    ClothesRowView(categoryName: "Top", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
-                    ClothesRowView(categoryName: "Top", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
-                    ClothesRowView(categoryName: "Top", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
-                    ClothesRowView(categoryName: "Top", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
-                    
-                    
-                }
-                .toolbar(content: {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            showAddClothesView.toggle()
-                        } label: {
-                            Image(systemName: "plus.circle")
+            VStack{
+                if clothes.isEmpty{
+                    emptyWardrobeView
+                }else{
+                    ScrollView {
+                        
+                        VStack(spacing: 30){
+                            
+                            ClothesRowView(categoryName: "Tops", subCategories: ["T-Shirts", "Jackets", "Coats", "Sweaters", "Hoodies", "Shirts", "Blouses"], selectedSubCategory: "T-Shirts", action: {})
+                            
+                            ClothesRowView(categoryName: "Bottom", subCategories: ["Jeans", "Shorts", "Skirts", "Leggings"], selectedSubCategory: "Jeans", action: {})
+                            
+                            ClothesRowView(categoryName: "Footwear", subCategories: ["Sneakers"], selectedSubCategory: "Sneakers", action: {})
+                            
+                            ClothesRowView(categoryName: "Accessories", subCategories: ["Necklace", "Earrings", "Bracelet", "Watch", "Glasses"], selectedSubCategory: "Necklace", action: {})
                         }
-
+                        
+                        
                     }
-                })
-                .padding(.top)
-                .navigationTitle("Wardrobe")
+                    .padding(.bottom, 100)
+                    .overlay(alignment: .bottom, content: {
+                        Button(
+                            action:{
+                                showingSheet.toggle()
+                            }
+                            
+                        ) {
+                            HStack {
+                                Text("Style Me")
+                                    .font(.title2.bold())
+                                
+                                Image(systemName: "wand.and.sparkles")
+                                    .renderingMode(.original)
+                                    .font(.system(size: 30))
+                            }
+                            
+                        }
+                        .buttonStyle(MainButton())
+                        .shadow(color: Color.main.opacity(0.5), radius: 10)
+                        .padding(.bottom, 20)
+                        .sheet(isPresented: $showingSheet) {
+                            StyleView(showingSheet: $showingSheet)
+                                .presentationDetents([.fraction(CGFloat(0.4))])
+                        }
+                    })
+                    .toolbar(content: {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button {
+                                showAddClothesView.toggle()
+                            } label: {
+                                Image(systemName: "plus.circle")
+                            }
+                            
+                        }
+                    })
+                }
             }
+            .padding(.top)
+            .navigationTitle("Wardrobe")
         }
+        
         .sheet(isPresented: $showAddClothesView, content: {AddClothesView(showAddClothesView: $showAddClothesView)})
     }
+    
 }
 
 #Preview {
@@ -51,7 +92,7 @@ extension WardrobeView{
     private var emptyWardrobeView: some View{
         VStack{
             Button {
-                
+                showAddClothesView.toggle()
             } label: {
                 ZStack{
                     Circle()
