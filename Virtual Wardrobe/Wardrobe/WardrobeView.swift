@@ -11,6 +11,7 @@ import SwiftData
 struct WardrobeView: View {
     @Environment(\.modelContext) private var context
     @State private var showAddClothesView = false
+    @State private var showingSheet = false
     
     @Query var clothes: [Clothe]
 
@@ -18,6 +19,9 @@ struct WardrobeView: View {
     var body: some View {
         NavigationStack{
             ScrollView {
+                
+                
+                
                 VStack(spacing: 30){
                     
                     ClothesRowView(categoryName: "Tops", subCategories: ["t-shirts", "jackets", "coats", "sweaters", "hoodies", "shirts", "blouses"], selectedSubCategory: "t-shirts", action: {})
@@ -35,7 +39,8 @@ struct WardrobeView: View {
                         Button {
                             showAddClothesView.toggle()
                         } label: {
-                            Image(systemName: "plus.circle")
+                            Image(systemName: "plus.circle.fill")
+                                .font(.title2)
                         }
 
                     }
@@ -43,7 +48,33 @@ struct WardrobeView: View {
                 .padding(.top)
                 .navigationTitle("Wardrobe")
             }
+            .padding(.bottom, 120)
         }
+        .overlay(alignment: .bottom, content: {
+            Button(
+                action:{
+                    showingSheet.toggle()
+                }
+                
+            ) {
+                HStack {
+                    Text("Style Me")
+                        .font(.title2.bold())
+                    
+                    Image(systemName: "wand.and.sparkles")
+                        .renderingMode(.original)
+                        .font(.system(size: 30))
+                }
+                
+            }
+            .buttonStyle(MainButton())
+            .shadow(radius: 20)
+            .padding(.bottom, 20)
+            .sheet(isPresented: $showingSheet) {
+                StyleView()
+                    .presentationDetents([.fraction(CGFloat(0.4))])
+            }
+        })
         .sheet(isPresented: $showAddClothesView, content: {AddClothesView(showAddClothesView: $showAddClothesView)})
     }
         

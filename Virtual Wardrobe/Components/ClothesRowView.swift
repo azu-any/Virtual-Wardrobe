@@ -58,6 +58,7 @@ struct ClothesRowView: View {
                                     Image(systemName: "chevron.right")
                                         .foregroundStyle(.white)
                                 }
+                      
                         }
 
                     }
