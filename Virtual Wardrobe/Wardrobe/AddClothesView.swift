@@ -15,11 +15,11 @@ struct AddClothesView: View {
     @Binding var showAddClothesView: Bool
     @State private var color: Color = Color.blue
     let subCategories: [String] = [
-        "t-shirts", "jeans", "shorts", "jackets", "coats", "sweaters", "hoodies",
-        "dresses", "skirts", "shirts", "blouses", "leggings", "sneakers", "necklace", "earrings", "bracelet", "watch", "glasses"
+        "T-Shirts", "Jeans", "Shorts", "Jackets", "Coats", "Sweaters", "Hoodies",
+        "Dresses", "Skirts", "Shirts", "Blouses", "Leggings", "Sneakers", "Necklace", "Earrings", "Bracelet", "Watch", "Glasses"
     ]
 
-    @State var selectedSubCategory: String = "t-shirts"
+    @State var selectedSubCategory: String = "T-Shirts"
     
     //photo library
     @State private var showPhotoPicker = false
@@ -107,18 +107,17 @@ struct AddClothesView: View {
                         image_data = selectedImage.pngData() ?? Data()
                     }
                     
-                    let red = color.components.red
-                    let green = color.components.green
-                    let blue = color.components.blue
                     
-                    let newClothe = Clothe(image: image_data, redAmount: Int(red), greenAmount: Int(green), blueAmount: Int(blue), type: selectedSubCategory)
-                    
-                    
-                    
-                    context.insert(newClothe)
-                    try? context.save()
-                    
-                    mode.wrappedValue.dismiss()
+                    if image_data.count > 0{
+                        let newClothe = Clothe(image: image_data, hexColor: color.hex, type: selectedSubCategory)
+                        
+                        
+                        
+                        context.insert(newClothe)
+                        try? context.save()
+                        
+                        mode.wrappedValue.dismiss()
+                    }
                 }
                 .buttonStyle(MainButton())
                 .padding(.top, 50)

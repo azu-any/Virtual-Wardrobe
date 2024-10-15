@@ -14,19 +14,14 @@ import SwiftUI
 class Clothe {
     @Attribute(.unique) var id: UUID = UUID()
     @Attribute(.externalStorage) var image: Data?
-    
-    var redAmount: Int
-    var greenAmount : Int
-    var blueAmount: Int
+    var hexColor: String
     
     var type: String
     var timesUsed: Int = 0
     
-    init(image: Data, redAmount: Int, greenAmount: Int, blueAmount: Int, type: String) {
+    init(image: Data? = nil, hexColor: String, type: String) {
         self.image = image
-        self.redAmount = redAmount
-        self.greenAmount = greenAmount
-        self.blueAmount = blueAmount
+        self.hexColor = hexColor
         self.type = type
     }
 }

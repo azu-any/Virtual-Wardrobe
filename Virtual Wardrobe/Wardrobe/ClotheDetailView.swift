@@ -24,7 +24,7 @@ struct ClotheDetailView: View {
                     Text("Color")
                     Spacer()
                     Circle()
-                        .fill(Color(red: Double(clothe.redAmount), green: Double(clothe.greenAmount), blue: Double(clothe.blueAmount)))
+                        .fill(Color(hex: clothe.hexColor))
                         .frame(width: 20)
                 }
                 
@@ -42,9 +42,6 @@ struct ClotheDetailView: View {
                 }
             }
             .frame(width: 200)
-        }
-        .onAppear {
-            print(clothe.blueAmount)
         }
     }
 }

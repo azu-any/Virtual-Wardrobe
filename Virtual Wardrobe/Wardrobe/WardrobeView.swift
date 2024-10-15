@@ -14,10 +14,11 @@ struct WardrobeView: View {
     @State private var showingSheet = false
     
     @Query var clothes: [Clothe]
-
+    
     
     var body: some View {
         NavigationStack{
+<<<<<<< Updated upstream
             ScrollView {
                 
                 
@@ -41,14 +42,48 @@ struct WardrobeView: View {
                         } label: {
                             Image(systemName: "plus.circle.fill")
                                 .font(.title2)
+=======
+            VStack{
+                if clothes.isEmpty{
+                    emptyWardrobeView
+                }else{
+                    ScrollView {
+                        
+                        VStack(spacing: 30){
+                            
+                            ClothesRowView(categoryName: "Tops", subCategories: ["T-Shirts", "Jackets", "Coats", "Sweaters", "Hoodies", "Shirts", "Blouses"], selectedSubCategory: "T-Shirts", action: {})
+                            
+                            ClothesRowView(categoryName: "Bottom", subCategories: ["Jeans", "Shorts", "Skirts", "Leggings"], selectedSubCategory: "Jeans", action: {})
+                            
+                            ClothesRowView(categoryName: "Footwear", subCategories: ["Sneakers"], selectedSubCategory: "Sneakers", action: {})
+                            
+                            ClothesRowView(categoryName: "Accessories", subCategories: ["Necklace", "Earrings", "Bracelet", "Watch", "Glasses"], selectedSubCategory: "Necklace", action: {})
+                            
+                        
+>>>>>>> Stashed changes
                         }
-
+                        
+                        
                     }
-                })
-                .padding(.top)
-                .navigationTitle("Wardrobe")
+                    .toolbar(content: {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button {
+                                showAddClothesView.toggle()
+                            } label: {
+                                Image(systemName: "plus.circle")
+                            }
+                            
+                        }
+                    })
+                }
             }
+<<<<<<< Updated upstream
             .padding(.bottom, 120)
+=======
+            
+            .padding(.top)
+            .navigationTitle("Wardrobe")
+>>>>>>> Stashed changes
         }
         .overlay(alignment: .bottom, content: {
             Button(
@@ -77,7 +112,7 @@ struct WardrobeView: View {
         })
         .sheet(isPresented: $showAddClothesView, content: {AddClothesView(showAddClothesView: $showAddClothesView)})
     }
-        
+    
 }
 
 #Preview {
@@ -88,7 +123,7 @@ extension WardrobeView{
     private var emptyWardrobeView: some View{
         VStack{
             Button {
-                
+                showAddClothesView.toggle()
             } label: {
                 ZStack{
                     Circle()
