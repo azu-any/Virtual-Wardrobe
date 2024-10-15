@@ -37,6 +37,32 @@ struct WardrobeView: View {
                         
                         
                     }
+                    .padding(.bottom, 100)
+                    .overlay(alignment: .bottom, content: {
+                        Button(
+                            action:{
+                                showingSheet.toggle()
+                            }
+                            
+                        ) {
+                            HStack {
+                                Text("Style Me")
+                                    .font(.title2.bold())
+                                
+                                Image(systemName: "wand.and.sparkles")
+                                    .renderingMode(.original)
+                                    .font(.system(size: 30))
+                            }
+                            
+                        }
+                        .buttonStyle(MainButton())
+                        .shadow(color: Color.main.opacity(0.5), radius: 10)
+                        .padding(.bottom, 20)
+                        .sheet(isPresented: $showingSheet) {
+                            StyleView(showingSheet: $showingSheet)
+                                .presentationDetents([.fraction(CGFloat(0.4))])
+                        }
+                    })
                     .toolbar(content: {
                         ToolbarItem(placement: .topBarTrailing) {
                             Button {
@@ -50,34 +76,9 @@ struct WardrobeView: View {
                 }
             }
             .padding(.top)
-            .padding(.bottom, 120)
             .navigationTitle("Wardrobe")
         }
-        .overlay(alignment: .bottom, content: {
-            Button(
-                action:{
-                    showingSheet.toggle()
-                }
-                
-            ) {
-                HStack {
-                    Text("Style Me")
-                        .font(.title2.bold())
-                    
-                    Image(systemName: "wand.and.sparkles")
-                        .renderingMode(.original)
-                        .font(.system(size: 30))
-                }
-                
-            }
-            .buttonStyle(MainButton())
-            .shadow(radius: 20)
-            .padding(.bottom, 20)
-            .sheet(isPresented: $showingSheet) {
-                StyleView(showingSheet: $showingSheet)
-                    .presentationDetents([.fraction(CGFloat(0.4))])
-            }
-        })
+        
         .sheet(isPresented: $showAddClothesView, content: {AddClothesView(showAddClothesView: $showAddClothesView)})
     }
     
