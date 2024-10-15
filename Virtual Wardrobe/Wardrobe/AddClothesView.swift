@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PhotosUI
+import BackgroundRemoval
 
 struct AddClothesView: View {
     
@@ -18,7 +19,7 @@ struct AddClothesView: View {
         "T-Shirts", "Jeans", "Shorts", "Jackets", "Coats", "Sweaters", "Hoodies",
         "Dresses", "Skirts", "Shirts", "Blouses", "Leggings", "Sneakers", "Necklace", "Earrings", "Bracelet", "Watch", "Glasses"
     ]
-
+    
     @State var selectedSubCategory: String = "T-Shirts"
     
     //photo library
@@ -55,7 +56,7 @@ struct AddClothesView: View {
                             .scaledToFill()
                             .frame(width: 200, height: 200)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
-
+                        
                     } else if let selectedImage{
                         Image(uiImage: selectedImage)
                             .resizable()
@@ -63,7 +64,7 @@ struct AddClothesView: View {
                             .frame(width: 200, height: 200)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                         
-
+                        
                     } else{
                         ZStack{
                             RoundedRectangle(cornerRadius: 10)
@@ -98,13 +99,28 @@ struct AddClothesView: View {
                     // Create a new clothe item
                     var image_data: Data = Data()
                     
+                    let backgroundRemoval = BackgroundRemoval()
+                    var image_without_background = UIImage()
+                    
                     if let image {
                         let renderer = ImageRenderer(content: image)
                         if let renderedImage = renderer.uiImage {
-                            image_data = renderedImage.pngData() ?? Data()
-                                    }
+                            do {
+                                image_without_background = try backgroundRemoval.removeBackground(image: renderedImage)
+                            } catch {
+                                print(error)
+                            }
+                            image_data = image_without_background.pngData() ?? Data()
+                            
+                        }
                     } else if let selectedImage{
-                        image_data = selectedImage.pngData() ?? Data()
+                        do {
+                            image_without_background = try backgroundRemoval.removeBackground(image: selectedImage)
+                        } catch {
+                            print(error)
+                        }
+                        image_data = image_without_background.pngData() ?? Data()
+                        
                     }
                     
                     
@@ -140,6 +156,8 @@ struct AddClothesView: View {
             .navigationTitle("Add new clothes")
         }
     }
+    
+    
     
     private func resetPhotos(){
         selectedItem = nil

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32E305322CBEB06D008B168B /* BackgroundRemoval in Frameworks */ = {isa = PBXBuildFile; productRef = 32E305312CBEB06D008B168B /* BackgroundRemoval */; };
 		DBCE83312CB561B300EC7D93 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = DBCE83302CB561AB00EC7D93 /* .gitignore */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32E305322CBEB06D008B168B /* BackgroundRemoval in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +73,7 @@
 			);
 			name = "Virtual Wardrobe";
 			packageProductDependencies = (
+				32E305312CBEB06D008B168B /* BackgroundRemoval */,
 			);
 			productName = "Virtual Wardrobe";
 			productReference = DBCE831F2CB55D1100EC7D93 /* Virtual Wardrobe.app */;
@@ -100,6 +103,9 @@
 			);
 			mainGroup = DBCE83162CB55D1100EC7D93;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				32E305302CBEB06D008B168B /* XCRemoteSwiftPackageReference "BackgroundRemoval" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DBCE83202CB55D1100EC7D93 /* Products */;
 			projectDirPath = "";
@@ -259,7 +265,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Virtual Wardrobe/Preview Content\"";
-				DEVELOPMENT_TEAM = SAM2A296M4;
+				DEVELOPMENT_TEAM = TAA3DBL33R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need to access camera for taking pictures";
@@ -293,7 +299,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Virtual Wardrobe/Preview Content\"";
-				DEVELOPMENT_TEAM = SAM2A296M4;
+				DEVELOPMENT_TEAM = TAA3DBL33R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need to access camera for taking pictures";
@@ -341,6 +347,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		32E305302CBEB06D008B168B /* XCRemoteSwiftPackageReference "BackgroundRemoval" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Ezaldeen99/BackgroundRemoval.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		32E305312CBEB06D008B168B /* BackgroundRemoval */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 32E305302CBEB06D008B168B /* XCRemoteSwiftPackageReference "BackgroundRemoval" */;
+			productName = BackgroundRemoval;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DBCE83172CB55D1100EC7D93 /* Project object */;
 }

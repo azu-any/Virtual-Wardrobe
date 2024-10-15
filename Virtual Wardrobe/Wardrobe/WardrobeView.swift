@@ -50,6 +50,7 @@ struct WardrobeView: View {
                 }
             }
             .padding(.top)
+            .padding(.bottom, 120)
             .navigationTitle("Wardrobe")
         }
         .overlay(alignment: .bottom, content: {
