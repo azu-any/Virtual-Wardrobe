@@ -10,10 +10,16 @@ import PhotosUI
 
 struct AddClothesView: View {
     
+    @Environment(\.modelContext) private var context
+    @Environment(\.presentationMode) var mode
     @Binding var showAddClothesView: Bool
     @State private var color: Color = Color.blue
-    let subCategories: [String] = ["Jeans", "T-Shirt"]
-    @State var selectedSubCategory: String = "Jeans"
+    let subCategories: [String] = [
+        "t-shirts", "jeans", "shorts", "jackets", "coats", "sweaters", "hoodies",
+        "dresses", "skirts", "shirts", "blouses", "leggings", "sneakers", "necklace", "earrings", "bracelet", "watch", "glasses"
+    ]
+
+    @State var selectedSubCategory: String = "t-shirts"
     
     //photo library
     @State private var showPhotoPicker = false
@@ -89,7 +95,30 @@ struct AddClothesView: View {
                 .frame(width: 200)
                 
                 Button("Save item"){
+                    // Create a new clothe item
+                    var image_data: Data = Data()
                     
+                    if let image {
+                        let renderer = ImageRenderer(content: image)
+                        if let renderedImage = renderer.uiImage {
+                            image_data = renderedImage.pngData() ?? Data()
+                                    }
+                    } else if let selectedImage{
+                        image_data = selectedImage.pngData() ?? Data()
+                    }
+                    
+                    let red = color.components.red
+                    let green = color.components.green
+                    let blue = color.components.blue
+                    
+                    let newClothe = Clothe(image: image_data, redAmount: Int(red), greenAmount: Int(green), blueAmount: Int(blue), type: selectedSubCategory)
+                    
+                    
+                    
+                    context.insert(newClothe)
+                    try? context.save()
+                    
+                    mode.wrappedValue.dismiss()
                 }
                 .buttonStyle(MainButton())
                 .padding(.top, 50)
@@ -107,7 +136,6 @@ struct AddClothesView: View {
                        let uimg = UIImage(data: loadedImage){
                         self.image = Image(uiImage: uimg)
                     }
-                    print("Failed to load the image")
                 }
             }
             .navigationTitle("Add new clothes")
@@ -120,11 +148,6 @@ struct AddClothesView: View {
         image = nil
     }
 }
-
-
-
-
-
 
 
 

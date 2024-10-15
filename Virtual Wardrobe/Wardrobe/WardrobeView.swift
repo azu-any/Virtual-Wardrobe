@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct WardrobeView: View {
-    
+    @Environment(\.modelContext) private var context
     @State private var showAddClothesView = false
     @State private var showingSheet = false
+    
+    @Query var clothes: [Clothe]
+
     
     var body: some View {
         NavigationStack{
@@ -20,11 +24,13 @@ struct WardrobeView: View {
                 
                 VStack(spacing: 30){
                     
-                    ClothesRowView(categoryName: "Top", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
-                    ClothesRowView(categoryName: "Bottom", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
-                    ClothesRowView(categoryName: "Footwear", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
-                    ClothesRowView(categoryName: "Accessories", subCategories: ["Tshirt", "Tshort"], selectedSubCategory: "Tshirt", action: {})
-
+                    ClothesRowView(categoryName: "Tops", subCategories: ["t-shirts", "jackets", "coats", "sweaters", "hoodies", "shirts", "blouses"], selectedSubCategory: "t-shirts", action: {})
+                    
+                    ClothesRowView(categoryName: "Bottom", subCategories: ["jeans", "shorts", "skirts", "leggings"], selectedSubCategory: "jeans", action: {})
+                    
+                    ClothesRowView(categoryName: "Footwear", subCategories: ["sneakers"], selectedSubCategory: "sneakers", action: {})
+                    
+                    ClothesRowView(categoryName: "Accessories", subCategories: ["necklace", "earrings", "bracelet", "watch", "glasses"], selectedSubCategory: "necklace", action: {})
                     
                     
                 }
@@ -71,6 +77,7 @@ struct WardrobeView: View {
         })
         .sheet(isPresented: $showAddClothesView, content: {AddClothesView(showAddClothesView: $showAddClothesView)})
     }
+        
 }
 
 #Preview {
