@@ -7,10 +7,12 @@
 
 
 import SwiftUI 
+import SwiftData
+
 
 struct CalendarView: View {
     @Binding var selectedDay: Date
-    @State var outfit: Image?//Outfit?
+    @Query var outfits: [Outfit]
     @State private var selectedEmotion: Int?
 
     var body: some View {
@@ -26,16 +28,23 @@ struct CalendarView: View {
                     
                     ScrollView{
                         // OUTFIT
-                        if outfit != nil{
+                        if outfits.isEmpty {
                             
                             HStack{
-                                outfit!
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 200, height: 200)
-                                    .foregroundColor(.white)
-                                    .padding()
+                                ForEach(outfits) { outfit in
+                                    ForEach(outfit.clothes) { clothe in
+                                        
+                                        Image(uiImage: UIImage(data: clothe.image ?? Data())!)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 200, height: 200)
+                                            .foregroundColor(.white)
+                                            .padding()
+                                    }
+                                    
+                                }
                             }
+                                    
                             
                             // MOOD TRACKER
 
@@ -78,8 +87,7 @@ struct CalendarView: View {
                                 }
                             }
                             
-                            
-                            
+                    
                         } else {
                             
                             Image(systemName: "plus.circle.fill")
