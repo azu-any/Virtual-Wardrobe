@@ -24,8 +24,9 @@ struct MainLabel: LabelStyle {
     func makeBody(configuration: Configuration) -> some View {
         HStack {
                 configuration.icon
-                    .foregroundColor(.secondary)
-                configuration.title
+                    .foregroundColor(.main)
+            configuration.title.bold()
+                .foregroundColor(.main)
                 }
             .frame(maxWidth: .infinity)
             .padding()

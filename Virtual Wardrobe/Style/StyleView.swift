@@ -44,7 +44,6 @@ struct StyleView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
-            .edgesIgnoringSafeArea(.all)
         }
 }
 
