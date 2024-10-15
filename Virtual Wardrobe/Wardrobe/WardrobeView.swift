@@ -59,14 +59,10 @@ struct WardrobeView: View {
                         .renderingMode(.original)
                         .font(.system(size: 30))
                 }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(Color.main)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .shadow(radius: 20)
+                
             }
-            .padding()
+            .buttonStyle(MainButton())
+            .shadow(radius: 20)
             .padding(.bottom, 20)
             .sheet(isPresented: $showingSheet) {
                 StyleView()
