@@ -18,31 +18,6 @@ struct WardrobeView: View {
     
     var body: some View {
         NavigationStack{
-<<<<<<< Updated upstream
-            ScrollView {
-                
-                
-                
-                VStack(spacing: 30){
-                    
-                    ClothesRowView(categoryName: "Tops", subCategories: ["t-shirts", "jackets", "coats", "sweaters", "hoodies", "shirts", "blouses"], selectedSubCategory: "t-shirts", action: {})
-                    
-                    ClothesRowView(categoryName: "Bottom", subCategories: ["jeans", "shorts", "skirts", "leggings"], selectedSubCategory: "jeans", action: {})
-                    
-                    ClothesRowView(categoryName: "Footwear", subCategories: ["sneakers"], selectedSubCategory: "sneakers", action: {})
-                    
-                    ClothesRowView(categoryName: "Accessories", subCategories: ["necklace", "earrings", "bracelet", "watch", "glasses"], selectedSubCategory: "necklace", action: {})
-                    
-                    
-                }
-                .toolbar(content: {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            showAddClothesView.toggle()
-                        } label: {
-                            Image(systemName: "plus.circle.fill")
-                                .font(.title2)
-=======
             VStack{
                 if clothes.isEmpty{
                     emptyWardrobeView
@@ -58,9 +33,6 @@ struct WardrobeView: View {
                             ClothesRowView(categoryName: "Footwear", subCategories: ["Sneakers"], selectedSubCategory: "Sneakers", action: {})
                             
                             ClothesRowView(categoryName: "Accessories", subCategories: ["Necklace", "Earrings", "Bracelet", "Watch", "Glasses"], selectedSubCategory: "Necklace", action: {})
-                            
-                        
->>>>>>> Stashed changes
                         }
                         
                         
@@ -77,13 +49,8 @@ struct WardrobeView: View {
                     })
                 }
             }
-<<<<<<< Updated upstream
-            .padding(.bottom, 120)
-=======
-            
             .padding(.top)
             .navigationTitle("Wardrobe")
->>>>>>> Stashed changes
         }
         .overlay(alignment: .bottom, content: {
             Button(
@@ -106,7 +73,7 @@ struct WardrobeView: View {
             .shadow(radius: 20)
             .padding(.bottom, 20)
             .sheet(isPresented: $showingSheet) {
-                StyleView()
+                StyleView(showingSheet: $showingSheet)
                     .presentationDetents([.fraction(CGFloat(0.4))])
             }
         })

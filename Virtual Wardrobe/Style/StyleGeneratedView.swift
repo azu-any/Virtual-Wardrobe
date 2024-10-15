@@ -10,6 +10,8 @@ import SwiftUI
 struct StyleGeneratedView: View {
     
     @State var clothes = []
+    @Binding var generateOutfit: Bool
+    @Binding var showingSheet: Bool
     
     var body: some View {
         
@@ -28,13 +30,20 @@ struct StyleGeneratedView: View {
                 }
             }
             
-            Button(action: {}){
+            Button(action: {
+                generateOutfit = false
+                showingSheet = false
+            }){
                 Text("Add outfit to the calendar")
                     .font(.headline.bold())
             }
             .buttonStyle(MainButton())
             
-            Button(action: {}){
+            Button(action: {
+                showingSheet = true
+                generateOutfit = false
+                
+            }){
                 Label("Generate again", systemImage: "arrow.trianglehead.2.clockwise")
                     .labelStyle(MainLabel())
             }
@@ -44,5 +53,6 @@ struct StyleGeneratedView: View {
 }
 
 #Preview {
-    StyleGeneratedView()
+    StyleGeneratedView(generateOutfit: .constant(true),
+        showingSheet: .constant(true))
 }

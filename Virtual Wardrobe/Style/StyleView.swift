@@ -9,6 +9,8 @@ import SwiftUI
 
 struct StyleView: View {
     @State private var isToggled: Bool = true
+    @State private var generateOutfit: Bool = false
+    @Binding var showingSheet: Bool
 
     var body: some View {
         ZStack {
@@ -28,7 +30,7 @@ struct StyleView: View {
                 .padding(.horizontal, 40)
                 
                 Button(action: {
-                    print("Button tapped!")
+                    generateOutfit = true
                 }) {
                     Text("Outfit Me")
                 }
@@ -42,14 +44,17 @@ struct StyleView: View {
                         .padding(.horizontal, 40)
                         .foregroundColor(.gray)
                 }
+            .sheet(isPresented: $generateOutfit, content: {
+                StyleGeneratedView(generateOutfit: $generateOutfit, showingSheet: $showingSheet   )})
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
         }
+        
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        StyleView()
+        StyleView(showingSheet: .constant(true))
     }
 }
 
