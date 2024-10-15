@@ -28,7 +28,7 @@ struct CalendarView: View {
                     
                     ScrollView{
                         // OUTFIT
-                        if outfits.isEmpty {
+                        if !outfits.isEmpty {
                             
                             HStack{
                                 ForEach(outfits) { outfit in
@@ -44,9 +44,6 @@ struct CalendarView: View {
                                     
                                 }
                             }
-                                    
-                            
-                            // MOOD TRACKER
 
                             
                             Text("Mood tracker")
