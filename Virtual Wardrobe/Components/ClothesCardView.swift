@@ -9,29 +9,33 @@ import SwiftUI
 
 struct ClothesCardView: View {
     
-    let imageName: String
-    let isSelected: Bool
+    let clothe: Clothe
+    var isSelected: Bool = false
     
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 23)
                 .fill(isSelected ? Color.main : .white)
             
-            Image(imageName)
+            Image(uiImage: UIImage(data: clothe.image ?? Data())!)
                 .resizable()
                 .scaledToFit()
                 .frame(height: 60)
         }
         .frame(width: 90, height: 90)
+        .padding(2)
+        .shadow(radius: 2)
     }
 }
 
-#Preview(traits: .sizeThatFitsLayout) {
-    ClothesCardView(imageName: "mockup_shirt", isSelected: false)
-        .shadow(radius: 2)
-        .padding()
-    
-    ClothesCardView(imageName: "mockup_shirt", isSelected: true)
-        .shadow(radius: 2)
-        .padding()
-}
+
+//#Preview(traits: .sizeThatFitsLayout) {
+//    ClothesCardView(clothe: Clothe(image: Data(), redAmount: 0, greenAmount: 0, blueAmount: 0, type: "jeans"), isSelected: false)
+//        .shadow(radius: 2)
+//        .padding()
+//    
+//    ClothesCardView(clothe: Clothe(image: Data(), redAmount: 0, greenAmount: 0, blueAmount: 0, type: "jeans"), isSelected: true)
+//        .shadow(radius: 2)
+//        .padding()
+//}
+
