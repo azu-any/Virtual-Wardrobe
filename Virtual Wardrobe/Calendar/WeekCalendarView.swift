@@ -36,6 +36,10 @@ public struct WeekCalendarView<Content: View>: View {
         }
         
         public var body: some View {
+            
+            Text(selectedDay.formatted(date: .long, time: .omitted))
+                .font(.title.bold())
+            
             TabView(selection: $activeTab) {
                 ForEach(WeekPosition.allCases) { position in
                     weekView(for: provider.weekDict[position, default: .default])

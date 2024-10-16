@@ -13,8 +13,6 @@ import SwiftData
 struct CalendarView: View {
     @Binding var selectedDay: Date
     @Query var outfits: [Outfit]
-    //@State var myOutfit: Outfit? // = .init(clothes: [], date: Date())
-    // @State var myOutfit: Outfit = Outfit(clothes: [], createdDate: Date())
     @State private var selectedEmotion: Int?
     @State private var isPresented: Bool = false
 
@@ -35,7 +33,8 @@ struct CalendarView: View {
                                 HStack{
                                     ForEach(myOutfit.clothes) { clothe in
                                         
-                                        ClothesCardView(clothe: clothe)
+                                        ClothesCardView(clothe: clothe, size: 120)
+                                            .frame(minWidth: 120)
                                     }
                                 }
                                 
@@ -45,25 +44,13 @@ struct CalendarView: View {
                                     .padding()
                                 
                                 moodButtons()
+                            } else {
+                                AddOutfit(isPresented: $isPresented)
                             }
                     
                         } else {
                             
-                            Button(action:{
-                                isPresented = true
-                            }) {
-                                Image(systemName: "plus.circle.fill")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 124, height: 124)
-                                    .foregroundColor(.main)
-                                    .padding()
-                            }
-                            Text("No outfits for today")
-                                .font(.callout)
-                                .padding()
-                            
-                            
+                            AddOutfit(isPresented: $isPresented)
                             
                         }
                     }
@@ -96,20 +83,46 @@ struct CalendarView: View {
             HStack(spacing: 20) {
                 ForEach(1...3, id: \.self) { emotion in
                     Button(action: {
-                        selectedEmotion = outfitForSelectedDay()?.selectedEmotion
                         outfitForSelectedDay()?.selectedEmotion = emotion
                     }) {
                         Text(emotion == 1 ? "🙂" : emotion == 2 ? "😐" : "🙁")
                             .padding(10)
                             .font(.system(size: 64))
-                            .background(selectedEmotion == emotion ? Color.main : Color.clear)
+                            .background(outfitForSelectedDay()?.selectedEmotion == emotion ? Color.main : Color.clear)
                             .clipShape(Circle())
                     }
                 }
             }
         }
     
+    
 
+}
+
+
+struct AddOutfit: View {
+    @Binding var isPresented: Bool
+    
+     var body: some View {
+        VStack{
+            Button(action: {
+                isPresented.toggle()
+            }) {
+                    Image(systemName: "plus.circle.fill")
+                        .font(.system(size: 150))
+                        .padding(10)
+                        .foregroundColor(.main)
+                    
+                    
+                }
+            
+            Text("No outfits for today")
+            .font(.callout)
+            .padding()
+        
+        }
+        
+    }
 }
 
 #Preview(traits: .sizeThatFitsLayout) {

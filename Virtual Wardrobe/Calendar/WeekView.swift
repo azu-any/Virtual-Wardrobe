@@ -40,9 +40,6 @@ public struct WeekView: View {
         
     public var body: some View {
         VStack{
-            Text(selectedDay.formatted(date: .long, time: .omitted))
-                .font(.title.bold())
-                .padding()
             
             HStack {
                 
