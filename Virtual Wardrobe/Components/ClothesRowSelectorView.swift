@@ -69,7 +69,8 @@ struct ClothesRowSelectorView: View {
                                         if myOutfit.hasClothe(clothe) {
                                             ClothesCardView(clothe: clothe)
                                                 .opacity(0.5)
-                                                .overlay(Image(systemName: "checkmark.circle.fill")
+                                                .overlay(Image(systemName: "checkmark.circle.fill"),
+                                                         alignment: .bottomTrailing
                                                          )
                                         } else {
                                             ClothesCardView(clothe: clothe)

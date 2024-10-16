@@ -30,20 +30,22 @@ struct CalendarView: View {
                         // OUTFIT
                         if let myOutfit = outfitForSelectedDay() {
                             
-                            HStack{
-                                ForEach(myOutfit.clothes) { clothe in
-                                    
-                                    ClothesCardView(clothe: clothe)
+                            if !myOutfit.clothes.isEmpty {
+                                
+                                HStack{
+                                    ForEach(myOutfit.clothes) { clothe in
+                                        
+                                        ClothesCardView(clothe: clothe)
+                                    }
                                 }
+                                
+                                Text("Mood tracker")
+                                    .font(.title.bold())
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding()
+                                
+                                moodButtons()
                             }
-
-                            
-                            Text("Mood tracker")
-                                .font(.title.bold())
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding()
-
-                            moodButtons()
                     
                         } else {
                             
@@ -94,7 +96,8 @@ struct CalendarView: View {
             HStack(spacing: 20) {
                 ForEach(1...3, id: \.self) { emotion in
                     Button(action: {
-                        selectedEmotion = emotion
+                        selectedEmotion = outfitForSelectedDay()?.selectedEmotion
+                        outfitForSelectedDay()?.selectedEmotion = emotion
                     }) {
                         Text(emotion == 1 ? "🙂" : emotion == 2 ? "😐" : "🙁")
                             .padding(10)

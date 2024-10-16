@@ -15,6 +15,7 @@ class Outfit {
     @Attribute(.unique) var id: UUID = UUID()
     var clothes: [Clothe]
     var createdDate: Date
+    var selectedEmotion: Int?
     
     init(clothes: [Clothe], createdDate: Date = Date()) {
         self.clothes = clothes
