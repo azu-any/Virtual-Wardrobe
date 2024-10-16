@@ -14,7 +14,7 @@ import SwiftUI
 class Outfit {
     @Attribute(.unique) var id: UUID = UUID()
     var clothes: [Clothe]
-    var createdDate: Date
+    @Attribute(.unique) var createdDate: Date
     var selectedEmotion: Int?
     
     init(clothes: [Clothe], createdDate: Date = Date()) {

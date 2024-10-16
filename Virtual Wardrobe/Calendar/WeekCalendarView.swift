@@ -35,10 +35,12 @@ public struct WeekCalendarView<Content: View>: View {
             self.customWeekView = customContent
         }
         
-        public var body: some View {
-            
+    public var body: some View {
+        VStack{
             Text(selectedDay.formatted(date: .long, time: .omitted))
                 .font(.title.bold())
+                .padding(.top, 10)
+            
             
             TabView(selection: $activeTab) {
                 ForEach(WeekPosition.allCases) { position in
@@ -65,7 +67,9 @@ public struct WeekCalendarView<Content: View>: View {
             .onChange(of: selectedDay) { _, newValue in
                 provider.setDate(newValue)
             }
+            .frame(maxWidth: .infinity)
         }
+    }
         
         @ViewBuilder
         private func weekView(for week: Week) -> some View {
