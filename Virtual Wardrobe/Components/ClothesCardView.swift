@@ -11,6 +11,7 @@ struct ClothesCardView: View {
     
     let clothe: Clothe
     var isSelected: Bool = false
+    var size: CGFloat = 90
     
     var body: some View {
         ZStack{
@@ -20,9 +21,10 @@ struct ClothesCardView: View {
             Image(uiImage: UIImage(data: clothe.image ?? Data())!)
                 .resizable()
                 .scaledToFit()
-                .frame(height: 60)
+                .padding(5)
+                //.frame(height: 60)
         }
-        .frame(width: 90, height: 90)
+        .frame(width: size, height: size)
         .padding(2)
         .shadow(radius: 2)
     }
