@@ -11,10 +11,12 @@ import SwiftData
 
 
 struct CalendarView: View {
+    @Environment(\.modelContext) var context
     @Binding var selectedDay: Date
     @Query var outfits: [Outfit]
     @State private var selectedEmotion: Int?
     @State private var isPresented: Bool = false
+    @State private var isEditing: Bool = false
 
     var body: some View {
         NavigationStack{
@@ -22,19 +24,28 @@ struct CalendarView: View {
                 VStack(alignment: .center){
                     
                     WeekCalendarView(selectedDay: $selectedDay)
-                        .frame(height: 170)
+                        .frame(height: 180)
                     
                     ScrollView{
-                        // OUTFIT
                         if let myOutfit = outfitForSelectedDay() {
                             
                             if !myOutfit.clothes.isEmpty {
                                 
-                                HStack{
-                                    ForEach(myOutfit.clothes) { clothe in
+                                ScrollView(.horizontal, showsIndicators: false){
+                                    
+                                    HStack(spacing: 10){
                                         
-                                        ClothesCardView(clothe: clothe, size: 120)
-                                            .frame(minWidth: 120)
+                                        Spacer()
+                                        
+                                        ForEach(myOutfit.clothes) { clothe in
+                                            
+                                            ClothesCardView(clothe: clothe, size: 120)
+                                        }
+                                        .onTapGesture {
+                                            isEditing = true
+                                        }
+                                            
+                                        Spacer()
                                     }
                                 }
                                 
@@ -49,15 +60,16 @@ struct CalendarView: View {
                             }
                     
                         } else {
-                            
                             AddOutfit(isPresented: $isPresented)
-                            
                         }
                     }
                     
                 }
                 .sheet(isPresented: $isPresented, content: {
-                    WardrobeSelectorView(selectedDay: $selectedDay)
+                    WardrobeSelectorView(selectedDay: $selectedDay, outfit: nil)
+                })
+                .sheet(isPresented: $isEditing, content: {
+                    WardrobeSelectorView(selectedDay: $selectedDay, outfit: outfitForSelectedDay())
                 })
                 .navigationTitle(Text("Calendar"))
                 
@@ -65,6 +77,7 @@ struct CalendarView: View {
                 
             
         }
+        .padding()
         
     }
     
@@ -72,7 +85,7 @@ struct CalendarView: View {
            let calendar = Calendar.current
            let componentsToCheck = calendar.dateComponents([.year, .month, .day], from: selectedDay)
 
-           return outfits.first { outfit in
+        return outfits.first { outfit in
                let outfitComponents = calendar.dateComponents([.year, .month, .day], from: outfit.createdDate)
                return outfitComponents == componentsToCheck
            }

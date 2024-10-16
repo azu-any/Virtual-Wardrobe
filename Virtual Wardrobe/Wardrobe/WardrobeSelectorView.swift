@@ -19,12 +19,16 @@ struct WardrobeSelectorView: View {
     @Query var outfits: [Outfit]
     @Binding var selectedDay: Date
     @State var myOutfit: Outfit
-    
-    init(selectedDay: Binding<Date>) {
-            _selectedDay = selectedDay
-            // Initialize myOutfit with the current selectedDay
-            _myOutfit = State(initialValue: Outfit(clothes: [], createdDate: selectedDay.wrappedValue))
+
+    init(selectedDay: Binding<Date>, outfit: Outfit? = nil) {
+        _selectedDay = selectedDay
+        
+        _myOutfit = State(initialValue: outfit ?? Outfit(clothes: [], createdDate: selectedDay.wrappedValue))
+        
+        if outfit != nil{
+            context.delete(outfit!)
         }
+    }
     
     
     var body: some View {
@@ -51,14 +55,13 @@ struct WardrobeSelectorView: View {
                         Button(
                             action:{
                                 myOutfit.createdDate = selectedDay
+                                context.insert(myOutfit)
                                 mode.wrappedValue.dismiss()
                             }
                             
                         ) {
-                            HStack {
                                 Text("Add Outfit")
                                     .font(.title2.bold())
-                            }
                             
                         }
                         .buttonStyle(MainButton())
