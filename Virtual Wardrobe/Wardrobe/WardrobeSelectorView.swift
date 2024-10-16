@@ -1,3 +1,4 @@
+
 //
 //  WardrobeView.swift
 //  Virtual Wardrobe
@@ -8,12 +9,16 @@
 import SwiftUI
 import SwiftData
 
-struct WardrobeView: View {
+struct WardrobeSelectorView: View {
     @Environment(\.modelContext) private var context
     @State private var showAddClothesView = false
     @State private var showingSheet = false
+    @Environment(\.presentationMode) var mode
     
     @Query var clothes: [Clothe]
+    @Query var outfits: [Outfit]
+    @Binding var myOutfit: Outfit
+    @Binding var selectedDay: Date
     
     
     var body: some View {
@@ -26,32 +31,27 @@ struct WardrobeView: View {
                         
                         VStack(spacing: 30){
                             
-                            ClothesRowView(categoryName: "Tops", subCategories: ["T-Shirts", "Jackets", "Coats", "Sweaters", "Hoodies", "Shirts", "Blouses"], selectedSubCategory: "T-Shirts", action: {})
+                            ClothesRowSelectorView(categoryName: "Tops", subCategories: ["T-Shirts", "Jackets", "Coats", "Sweaters", "Hoodies", "Shirts", "Blouses"], selectedSubCategory: "T-Shirts", action: {}, myOutfit: $myOutfit)
                             
-                            ClothesRowView(categoryName: "Bottom", subCategories: ["Jeans", "Shorts", "Skirts", "Leggings"], selectedSubCategory: "Jeans", action: {})
+                            ClothesRowSelectorView(categoryName: "Bottom", subCategories: ["Jeans", "Shorts", "Skirts", "Leggings"], selectedSubCategory: "Jeans", action: {}, myOutfit: $myOutfit)
                             
-                            ClothesRowView(categoryName: "Footwear", subCategories: ["Sneakers"], selectedSubCategory: "Sneakers", action: {})
+                            ClothesRowSelectorView(categoryName: "Footwear", subCategories: ["Sneakers"], selectedSubCategory: "Sneakers", action: {}, myOutfit: $myOutfit)
                             
-                            ClothesRowView(categoryName: "Accessories", subCategories: ["Necklace", "Earrings", "Bracelet", "Watch", "Glasses"], selectedSubCategory: "Necklace", action: {})
+                            ClothesRowSelectorView(categoryName: "Accessories", subCategories: ["Necklace", "Earrings", "Bracelet", "Watch", "Glasses"], selectedSubCategory: "Necklace", action: {}, myOutfit: $myOutfit)
                         }
-                        
-                        
                     }
                     .padding(.bottom, 100)
                     .overlay(alignment: .bottom, content: {
                         Button(
                             action:{
-                                showingSheet.toggle()
+                                myOutfit.createdDate = selectedDay
+                                mode.wrappedValue.dismiss()
                             }
                             
                         ) {
                             HStack {
-                                Text("Style Me")
+                                Text("Add Outfit")
                                     .font(.title2.bold())
-                                
-                                Image(systemName: "wand.and.sparkles")
-                                    .renderingMode(.original)
-                                    .font(.system(size: 30))
                             }
                             
                         }
@@ -89,7 +89,7 @@ struct WardrobeView: View {
     WardrobeView()
 }
 
-extension WardrobeView{
+extension WardrobeSelectorView{
     private var emptyWardrobeView: some View{
         VStack{
             Button {

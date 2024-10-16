@@ -8,13 +8,15 @@
 import SwiftUI
 import SwiftData
 
-struct ClothesRowView: View {
+struct ClothesRowSelectorView: View {
     let categoryName: String
     let subCategories: [String]
     @State var selectedSubCategory: String
     var action: () -> Void
-    
+    @Environment(\.modelContext) var context
     @Query var clothes: [Clothe]
+    @Query var outfits: [Outfit]
+    @Binding var myOutfit: Outfit
     
     var isEmpty: Bool{
         var count = 0
@@ -46,14 +48,11 @@ struct ClothesRowView: View {
                         }
                         Spacer()
                         
-                        
-                        
                         Button {
                             action()
                         } label: {
                             Image(systemName: "chevron.right")
-                                .foregroundStyle(.main)
-                      
+                            .foregroundStyle(.main)
                         }
 
                     }
@@ -63,16 +62,26 @@ struct ClothesRowView: View {
                         HStack{
                             ForEach(clothes){ clothe in
                                 if selectedSubCategory == clothe.type{
-                                    NavigationLink {
-                                        ClotheDetailView(clothe: clothe)
+                                    Button {
+                                        myOutfit.addClothe(clothe)
+                                        
                                     } label: {
-                                        ClothesCardView(clothe: clothe)
+                                        if myOutfit.hasClothe(clothe) {
+                                            ClothesCardView(clothe: clothe)
+                                                .opacity(0.5)
+                                                .overlay(Image(systemName: "checkmark.circle.fill")
+                                                         )
+                                        } else {
+                                            ClothesCardView(clothe: clothe)
+                                        }
+                                        
+                                        
                                     }
-
                                 }
                             }
                         }
                     }
+                    
                     .padding(.leading)
                     
                 }

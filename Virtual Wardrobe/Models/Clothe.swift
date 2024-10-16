@@ -15,7 +15,6 @@ class Clothe {
     @Attribute(.unique) var id: UUID = UUID()
     @Attribute(.externalStorage) var image: Data?
     var hexColor: String
-    
     var type: String
     var timesUsed: Int = 0
     
@@ -25,3 +24,6 @@ class Clothe {
         self.type = type
     }
 }
+
+
+
