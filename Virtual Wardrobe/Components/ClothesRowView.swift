@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct ClothesRowView: View {
+    @Environment(\.modelContext) private var context
     let categoryName: String
     let subCategories: [String]
     @State var selectedSubCategory: String
@@ -67,6 +68,14 @@ struct ClothesRowView: View {
                                         ClotheDetailView(clothe: clothe)
                                     } label: {
                                         ClothesCardView(clothe: clothe)
+                                            .contextMenu {
+                                                Button(role: .destructive){
+                                                    context.delete(clothe)
+                                                    try? context.save()
+                                                } label: {
+                                                    Label("Delete Clothe", systemImage: "xmark.circle")
+                                                }
+                                            }
                                     }
 
                                 }
