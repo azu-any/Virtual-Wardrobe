@@ -16,7 +16,7 @@ struct Virtual_WardrobeApp: App {
     init() {
         do {
             let config1 = ModelConfiguration(for: Clothe.self)
-            let config2 = ModelConfiguration(for: Outfit.self, isStoredInMemoryOnly: true)
+            let config2 = ModelConfiguration(for: Outfit.self, isStoredInMemoryOnly: false)
 
             container = try ModelContainer(for: Clothe.self, Outfit.self, configurations: config1, config2)
         } catch {
