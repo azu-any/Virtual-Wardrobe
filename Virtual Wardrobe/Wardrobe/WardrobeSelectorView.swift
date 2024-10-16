@@ -17,8 +17,14 @@ struct WardrobeSelectorView: View {
     
     @Query var clothes: [Clothe]
     @Query var outfits: [Outfit]
-    @Binding var myOutfit: Outfit
     @Binding var selectedDay: Date
+    @State var myOutfit: Outfit
+    
+    init(selectedDay: Binding<Date>) {
+            _selectedDay = selectedDay
+            // Initialize myOutfit with the current selectedDay
+            _myOutfit = State(initialValue: Outfit(clothes: [], createdDate: selectedDay.wrappedValue))
+        }
     
     
     var body: some View {
