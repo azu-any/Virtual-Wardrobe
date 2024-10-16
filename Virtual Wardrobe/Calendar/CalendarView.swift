@@ -13,7 +13,10 @@ import SwiftData
 struct CalendarView: View {
     @Binding var selectedDay: Date
     @Query var outfits: [Outfit]
+    //@State var myOutfit: Outfit? // = .init(clothes: [], date: Date())
+    @State var myOutfit: Outfit = Outfit(clothes: [], createdDate: Date())
     @State private var selectedEmotion: Int?
+    @State private var isPresented: Bool = false
 
     var body: some View {
         NavigationStack{
@@ -23,25 +26,15 @@ struct CalendarView: View {
                     WeekCalendarView(selectedDay: $selectedDay)
                         .frame(height: 170)
                     
-                    // LOGIC
-                    // if outfit for today
-                    
                     ScrollView{
                         // OUTFIT
-                        if !outfits.isEmpty {
+                        if let myOutfit = outfitForSelectedDay() {
+                            //myOutfit = outfit // Keep myOutfit updated
                             
                             HStack{
-                                ForEach(outfits) { outfit in
-                                    ForEach(outfit.clothes) { clothe in
-                                        
-                                        Image(uiImage: UIImage(data: clothe.image ?? Data())!)
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 200, height: 200)
-                                            .foregroundColor(.white)
-                                            .padding()
-                                    }
+                                ForEach(myOutfit.clothes) { clothe in
                                     
+                                    ClothesCardView(clothe: clothe)
                                 }
                             }
 
@@ -51,7 +44,7 @@ struct CalendarView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding()
 
-                            HStack(spacing: 20){
+                            /*HStack(spacing: 20){
                                 
                                 Button(action: {
                                     selectedEmotion = 1
@@ -82,27 +75,34 @@ struct CalendarView: View {
                                         .background(selectedEmotion == 3 ? Color.main : Color.clear)
                                         .clipShape(Circle())
                                 }
-                            }
-                            
+                            }*/
+                            moodButtons()
                     
                         } else {
                             
-                            Image(systemName: "plus.circle.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 124, height: 124)
-                                .foregroundColor(.main)
-                                .padding()
-                            
+                            Button(action:{
+                                isPresented = true
+                            }) {
+                                Image(systemName: "plus.circle.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 124, height: 124)
+                                    .foregroundColor(.main)
+                                    .padding()
+                            }
                             Text("No outfits for today")
                                 .font(.callout)
                                 .padding()
+                            
                             
                             
                         }
                     }
                     
                 }
+                .sheet(isPresented: $isPresented, content: {
+                    WardrobeSelectorView(myOutfit: $myOutfit, selectedDay: $selectedDay)
+                })
                 .navigationTitle(Text("Calendar"))
                 
                 Spacer()
@@ -111,6 +111,35 @@ struct CalendarView: View {
         }
         
     }
+    
+    private func outfitForSelectedDay() -> Outfit? {
+           let calendar = Calendar.current
+           let componentsToCheck = calendar.dateComponents([.year, .month, .day], from: selectedDay)
+
+           return outfits.first { outfit in
+               let outfitComponents = calendar.dateComponents([.year, .month, .day], from: outfit.createdDate)
+               return outfitComponents == componentsToCheck
+           }
+       }
+    
+    
+    private func moodButtons() -> some View {
+            HStack(spacing: 20) {
+                ForEach(1...3, id: \.self) { emotion in
+                    Button(action: {
+                        selectedEmotion = emotion
+                    }) {
+                        Text(emotion == 1 ? "🙂" : emotion == 2 ? "😐" : "🙁")
+                            .padding(10)
+                            .font(.system(size: 64))
+                            .background(selectedEmotion == emotion ? Color.main : Color.clear)
+                            .clipShape(Circle())
+                    }
+                }
+            }
+        }
+    
+
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
