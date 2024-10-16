@@ -11,7 +11,7 @@ import SwiftData
 @main
 struct Virtual_WardrobeApp: App {
     
-    var container: ModelContainer
+    /*var container: ModelContainer
 
     init() {
         do {
@@ -23,13 +23,13 @@ struct Virtual_WardrobeApp: App {
             print("Error: \(error)")
             fatalError("Failed to configure SwiftData container.")
         }
-    }
+    }*/
     
     
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(container)
+        .modelContainer(for: [Clothe.self, Outfit.self])
     }
 }
