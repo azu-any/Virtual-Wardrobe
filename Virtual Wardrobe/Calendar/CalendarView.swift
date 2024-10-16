@@ -14,7 +14,7 @@ struct CalendarView: View {
     @Binding var selectedDay: Date
     @Query var outfits: [Outfit]
     //@State var myOutfit: Outfit? // = .init(clothes: [], date: Date())
-    @State var myOutfit: Outfit = Outfit(clothes: [], createdDate: Date())
+    // @State var myOutfit: Outfit = Outfit(clothes: [], createdDate: Date())
     @State private var selectedEmotion: Int?
     @State private var isPresented: Bool = false
 
@@ -29,7 +29,6 @@ struct CalendarView: View {
                     ScrollView{
                         // OUTFIT
                         if let myOutfit = outfitForSelectedDay() {
-                            //myOutfit = outfit // Keep myOutfit updated
                             
                             HStack{
                                 ForEach(myOutfit.clothes) { clothe in
@@ -44,38 +43,6 @@ struct CalendarView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding()
 
-                            /*HStack(spacing: 20){
-                                
-                                Button(action: {
-                                    selectedEmotion = 1
-                                }){
-                                    Text("🙂")
-                                        .padding(10)
-                                        .font(.system(size: 64))
-                                        .background(selectedEmotion == 1 ? Color.main : Color.clear)
-                                        .clipShape(Circle())
-                                }
-                                
-                                Button(action: {
-                                    selectedEmotion = 2
-                                }){
-                                    Text("😐")
-                                        .padding(10)
-                                        .font(.system(size: 64))
-                                        .background(selectedEmotion == 2 ? Color.main : Color.clear)
-                                        .clipShape(Circle())
-                                }
-                                
-                                Button(action: {
-                                    selectedEmotion = 3
-                                }){
-                                    Text("🙁")
-                                        .padding(10)
-                                        .font(.system(size: 64))
-                                        .background(selectedEmotion == 3 ? Color.main : Color.clear)
-                                        .clipShape(Circle())
-                                }
-                            }*/
                             moodButtons()
                     
                         } else {
@@ -101,7 +68,7 @@ struct CalendarView: View {
                     
                 }
                 .sheet(isPresented: $isPresented, content: {
-                    WardrobeSelectorView(myOutfit: $myOutfit, selectedDay: $selectedDay)
+                    WardrobeSelectorView(selectedDay: $selectedDay)
                 })
                 .navigationTitle(Text("Calendar"))
                 
