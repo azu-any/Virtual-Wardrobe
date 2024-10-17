@@ -22,10 +22,10 @@ struct StyleView: View {
     @State private var generatedClothes: [Clothe]?
 
     
-    let top = ["T-Shirts", "Jackets", "Coats", "Sweaters", "Hoodies", "Shirts", "Blouses"]
-    let bottom = ["Jeans", "Shorts", "Skirts", "Leggings"]
-    let footwear = ["Sneakers"]
-    let accessories = ["Necklace", "Earrings", "Bracelet", "Watch", "Glasses"]
+    let top = Clothe.ClotheType.top.subCategoriesOnly() //["T-Shirts", "Jackets", "Coats", "Sweaters", "Hoodies", "Shirts", "Blouses"]
+    let bottom = Clothe.ClotheType.bottom.subCategoriesOnly() //["Jeans", "Shorts", "Skirts", "Leggings"]
+    let footwear = Clothe.ClotheType.footwear.subCategoriesOnly() //["Sneakers"]
+    let accessories = Clothe.ClotheType.accessories.subCategoriesOnly() //["Necklace", "Earrings", "Bracelet", "Watch", "Glasses"]
     
 
     var body: some View {

@@ -58,6 +58,23 @@ extension Clothe {
             }
         }
         
+        func subCategoriesOnly() -> [String] {
+            switch self {
+            case .top:
+                return Top.allCases.map { $0.rawValue }
+            case .bottom:
+                return Bottom.allCases.map { $0.rawValue}
+            case .footwear:
+                return Footwear.allCases.map { $0.rawValue }
+            case .accessories:
+                return Accessory.allCases.map { $0.rawValue }
+            case .outerwear:
+                return Outerwear.allCases.map { $0.rawValue }
+            case .dresses:
+                return Dress.allCases.map { $0.rawValue }
+            }
+        }
+        
         enum Top: String, CaseIterable, Codable {
             case tShirt = "T-Shirts"
             case shirt = "Shirts"

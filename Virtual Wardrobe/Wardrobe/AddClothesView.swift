@@ -55,24 +55,24 @@ struct AddClothesView: View {
                         image
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 200, height: 200)
+                            .frame(width: 250, height: 250)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                         
                     } else if let selectedImage{
                         Image(uiImage: selectedImage)
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 200, height: 200)
+                            .frame(width: 250, height: 250)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                         
                     } else{
                         ZStack{
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(Color.gray.opacity(0.30))
-                                .frame(width: 200, height: 200)
+                                .frame(width: 250, height: 250)
                             
                             Image(systemName: "camera.fill")
-                                .font(.system(size: 80))
+                                .font(.system(size: 100))
                                 .foregroundStyle(.gray)
                             
                         }
@@ -82,28 +82,33 @@ struct AddClothesView: View {
                 
                 
                 VStack(spacing: 20){
+                    
                     ColorPicker("Color", selection: $color)
                     
-                    Picker("Select a category", selection: $selectedCategory) {
-                        ForEach(Clothe.ClotheType.allCases, id: \.self) { category in
-                            Text(category.rawValue).tag(category)
+                    HStack{
+                        Text("Category")
+                        Spacer()
+                        Picker("Category", selection: $selectedCategory) {
+                            ForEach(Clothe.ClotheType.allCases, id: \.self) { category in
+                                Text(category.rawValue).tag(category)
+                            }
                         }
                     }
-                    .pickerStyle(SegmentedPickerStyle())
+                    .frame(maxWidth: .infinity)
                     
                     HStack{
-                        Text("Subcategory")
+                        Text("Type")
                         Spacer()
                         
                         // Picker for selecting subcategories based on the selected category
-                        Picker("Select a subcategory", selection: $selectedSubCategory) {
+                        Picker("Subcategory", selection: $selectedSubCategory) {
                             ForEach(selectedCategory.subcategories(), id: \.0) { subcategory, _ in
                                 Text(" \(subcategory)").tag(subcategory)
                             }
                         }
                     }
                 }
-                .frame(width: 200)
+                .frame(width: 250)
                 
                 Button("Save item"){
                     // Create a new clothe item
