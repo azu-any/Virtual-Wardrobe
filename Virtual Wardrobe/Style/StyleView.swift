@@ -134,7 +134,7 @@ struct StyleView: View {
         
         for category in top{
             for clothe in clothes{
-                if category.contains(clothe.type){
+                if category.contains(clothe.type.rawValue){
                     dict["Top"]?.append(clothe)
                     print("here")
                 }
@@ -143,7 +143,7 @@ struct StyleView: View {
         
         for category in bottom{
             for clothe in clothes{
-                if category.contains(clothe.type){
+                if category.contains(clothe.type.rawValue){
                     dict["Bottom"]?.append(clothe)
                     print("here")
                 }
@@ -152,7 +152,7 @@ struct StyleView: View {
         
         for category in footwear{
             for clothe in clothes{
-                if category.contains(clothe.type){
+                if category.contains(clothe.type.rawValue){
                     dict["Footwear"]?.append(clothe)
                     print("here")
                 }
@@ -161,7 +161,7 @@ struct StyleView: View {
         
         for category in accessories{
             for clothe in clothes{
-                if category.contains(clothe.type){
+                if category.contains(clothe.type.rawValue){
                     dict["Accessory"]?.append(clothe)
                     print("here")
                 }
