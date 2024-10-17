@@ -31,7 +31,7 @@ struct ClotheDetailView: View {
                 HStack{
                     Text("Type")
                     Spacer()
-                    Text(clothe.type)
+                    Text(clothe.type.rawValue)
                         .foregroundStyle(.secondary)
                 }
                 

@@ -33,7 +33,7 @@ struct CalendarView: View {
                                 
                                 ScrollView(.horizontal, showsIndicators: false){
                                     
-                                    HStack(spacing: 10){
+                                    HStack(alignment: .center, spacing: 10){
                                         
                                         Spacer()
                                         

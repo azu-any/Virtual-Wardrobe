@@ -20,8 +20,9 @@ struct AddClothesView: View {
         "Dresses", "Skirts", "Shirts", "Blouses", "Leggings", "Sneakers", "Necklace", "Earrings", "Bracelet", "Watch", "Glasses"
     ]
     
-    @State var selectedSubCategory: String = "T-Shirts"
-    
+    @State var selectedSubCategory: String = Clothe.ClotheType.Top.tShirt.rawValue
+    @State var selectedCategory: Clothe.ClotheType = Clothe.ClotheType.top
+
     //photo library
     @State private var showPhotoPicker = false
     @State private var showCamera = false
@@ -64,7 +65,6 @@ struct AddClothesView: View {
                             .frame(width: 200, height: 200)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                         
-                        
                     } else{
                         ZStack{
                             RoundedRectangle(cornerRadius: 10)
@@ -83,12 +83,22 @@ struct AddClothesView: View {
                 
                 VStack(spacing: 20){
                     ColorPicker("Color", selection: $color)
+                    
+                    Picker("Select a category", selection: $selectedCategory) {
+                        ForEach(Clothe.ClotheType.allCases, id: \.self) { category in
+                            Text(category.rawValue).tag(category)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    
                     HStack{
-                        Text("Type")
+                        Text("Subcategory")
                         Spacer()
-                        Picker("Picker", selection: $selectedSubCategory) {
-                            ForEach(subCategories, id: \.self) {
-                                Text($0)
+                        
+                        // Picker for selecting subcategories based on the selected category
+                        Picker("Select a subcategory", selection: $selectedSubCategory) {
+                            ForEach(selectedCategory.subcategories(), id: \.0) { subcategory, _ in
+                                Text(" \(subcategory)").tag(subcategory)
                             }
                         }
                     }
@@ -125,7 +135,7 @@ struct AddClothesView: View {
                     
                     
                     if image_data.count > 0{
-                        let newClothe = Clothe(image: image_data, hexColor: color.hex, type: selectedSubCategory)
+                        let newClothe = Clothe(image: image_data, hexColor: color.hex, type: selectedCategory, subType: selectedSubCategory)
                         
                         
                         
