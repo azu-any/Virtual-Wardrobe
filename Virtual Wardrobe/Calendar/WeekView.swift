@@ -46,7 +46,7 @@ public struct WeekView: View {
             
             HStack {
                 Text(week.dates[0], format: .dateTime.month(.wide))
-                    .font(.title3.bold())
+                    .font(.headline.bold())
                     .textCase(.uppercase)
                 
                 Button{

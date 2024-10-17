@@ -27,12 +27,14 @@ class Outfit {
     func addClothe(_ clothe: Clothe) {
         // Check if the clothe type already exists in the outfit
         if let index = self.clothes.firstIndex(where: { $0.type == clothe.type }) {
-            // Replace existing clothe
             self.clothes[index] = clothe
         } else {
-            // Add new clothe
             self.clothes.append(clothe)
         }
+    }
+    
+    func removeClothe(_ clothe: Clothe) {
+        self.clothes.removeAll(where: { $0 == clothe })
     }
     
     // Function to check if a Clothe of a specific type exists

@@ -26,13 +26,53 @@ struct WardrobeView: View {
                         
                         VStack(spacing: 30){
                             
-                            ClothesRowView(categoryName: "Tops", subCategories: ["T-Shirts", "Jackets", "Coats", "Sweaters", "Hoodies", "Shirts", "Blouses"], selectedSubCategory: "T-Shirts", action: {})
+                            // Tops Category
+                            ClothesRowView(
+                                categoryName: Clothe.ClotheType.top.rawValue,
+                                subCategories: Clothe.ClotheType.allCases.map { $0.rawValue },
+                                selectedSubCategory: Clothe.ClotheType.Top.tShirt.rawValue,
+                                action: {}
+                            )
                             
-                            ClothesRowView(categoryName: "Bottom", subCategories: ["Jeans", "Shorts", "Skirts", "Leggings"], selectedSubCategory: "Jeans", action: {})
+                            // Bottoms Category
+                            ClothesRowView(
+                                categoryName: Clothe.ClotheType.bottom.rawValue,
+                                subCategories: Clothe.ClotheType.allCases.map { $0.rawValue },
+                                selectedSubCategory: Clothe.ClotheType.Bottom.jeans.rawValue,
+                                action: {}
+                            )
                             
-                            ClothesRowView(categoryName: "Footwear", subCategories: ["Sneakers"], selectedSubCategory: "Sneakers", action: {})
+                            // Footwear Category
+                            ClothesRowView(
+                                categoryName: Clothe.ClotheType.footwear.rawValue,
+                                subCategories: Clothe.ClotheType.Footwear.allCases.map { $0.rawValue },
+                                selectedSubCategory: Clothe.ClotheType.Footwear.sneakers.rawValue,
+                                action: {}
+                            )
                             
-                            ClothesRowView(categoryName: "Accessories", subCategories: ["Necklace", "Earrings", "Bracelet", "Watch", "Glasses"], selectedSubCategory: "Necklace", action: {})
+                            // Accessories Category
+                            ClothesRowView(
+                                categoryName: Clothe.ClotheType.accessories.rawValue,
+                                subCategories: Clothe.ClotheType.Accessory.allCases.map { $0.rawValue },
+                                selectedSubCategory: Clothe.ClotheType.Accessory.necklace.rawValue,
+                                action: {}
+                            )
+                            
+                            // Outerwear Category
+                            ClothesRowView(
+                                categoryName: Clothe.ClotheType.outerwear.rawValue,
+                                subCategories: Clothe.ClotheType.Outerwear.allCases.map { $0.rawValue },
+                                selectedSubCategory: Clothe.ClotheType.Outerwear.hoodies.rawValue,
+                                action: {}
+                            )
+                            
+                            // Dresses Category
+                            ClothesRowView(
+                                categoryName: Clothe.ClotheType.dresses.rawValue,
+                                subCategories: Clothe.ClotheType.Dress.allCases.map { $0.rawValue },
+                                selectedSubCategory: Clothe.ClotheType.Dress.maxi.rawValue,
+                                action: {}
+                            )
                         }
                         
                         
