@@ -7,16 +7,17 @@ struct ContentView: View {
     var body: some View {
         
             TabView {
-                CalendarView(selectedDay: $selectedDay)
-                    .tabItem {
-                        Image(systemName: "calendar")
-                        Text("Calendar")
-                    }
                 
                 WardrobeView()
                     .tabItem {
                         Image(systemName: "tshirt.fill")
                         Text("Wardrobe")
+                    }
+                
+                CalendarView(selectedDay: $selectedDay)
+                    .tabItem {
+                        Image(systemName: "calendar")
+                        Text("Calendar")
                     }
             }
             .accentColor(Color.main)

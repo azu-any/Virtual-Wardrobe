@@ -21,64 +21,61 @@ struct CalendarView: View {
     var body: some View {
         NavigationStack{
             
-                VStack(alignment: .center){
-                    
-                    WeekCalendarView(selectedDay: $selectedDay)
-                        .frame(height: 180)
-                    
-                    ScrollView{
-                        if let myOutfit = outfitForSelectedDay() {
+            VStack(alignment: .center){
+                
+                WeekCalendarView(selectedDay: $selectedDay)
+                    .frame(height: 180)
+                
+                ScrollView{
+                    if let myOutfit = outfitForSelectedDay() {
+                        
+                        if !myOutfit.clothes.isEmpty {
                             
-                            if !myOutfit.clothes.isEmpty {
+                            ScrollView(.horizontal, showsIndicators: false){
                                 
-                                ScrollView(.horizontal, showsIndicators: false){
+                                HStack(alignment: .center, spacing: 10){
                                     
-                                    HStack(alignment: .center, spacing: 10){
+                                    Spacer()
+                                    
+                                    ForEach(myOutfit.clothes) { clothe in
                                         
-                                        Spacer()
-                                        
-                                        ForEach(myOutfit.clothes) { clothe in
-                                            
-                                            ClothesCardView(clothe: clothe, size: 120)
-                                        }
-                                        .onTapGesture {
-                                            isEditing = true
-                                        }
-                                            
-                                        Spacer()
+                                        ClothesCardView(clothe: clothe, size: 120)
                                     }
+                                    .onTapGesture {
+                                        isEditing = true
+                                    }
+                                        
+                                    Spacer()
                                 }
-                                
-                                Text("Mood tracker")
-                                    .font(.title.bold())
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding()
-                                
-                                moodButtons()
-                            } else {
-                                AddOutfit(isPresented: $isPresented)
                             }
-                    
+                            
+                            Text("Mood tracker")
+                                .font(.title.bold())
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding()
+                            
+                            moodButtons()
                         } else {
                             AddOutfit(isPresented: $isPresented)
                         }
+                
+                    } else {
+                        AddOutfit(isPresented: $isPresented)
                     }
-                    
                 }
-                .sheet(isPresented: $isPresented, content: {
-                    WardrobeSelectorView(selectedDay: $selectedDay, outfit: nil)
-                })
-                .sheet(isPresented: $isEditing, content: {
-                    WardrobeSelectorView(selectedDay: $selectedDay, outfit: outfitForSelectedDay())
-                })
-                .navigationTitle(Text("Calendar"))
                 
                 Spacer()
-                
+            }
+            .sheet(isPresented: $isPresented, content: {
+                WardrobeSelectorView(selectedDay: $selectedDay, outfit: nil)
+            })
+            .sheet(isPresented: $isEditing, content: {
+                WardrobeSelectorView(selectedDay: $selectedDay, outfit: outfitForSelectedDay())
+            })
+            .navigationTitle(Text("Calendar"))
+            
             
         }
-        .padding()
-        
     }
     
     private func outfitForSelectedDay() -> Outfit? {

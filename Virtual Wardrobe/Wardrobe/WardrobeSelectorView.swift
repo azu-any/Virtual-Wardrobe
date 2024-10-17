@@ -37,13 +37,61 @@ struct WardrobeSelectorView: View {
                         
                         VStack(spacing: 30){
                             
-                            ClothesRowSelectorView(categoryName: "Tops", subCategories: ["T-Shirts", "Jackets", "Coats", "Sweaters", "Hoodies", "Shirts", "Blouses"], selectedSubCategory: "T-Shirts", action: {}, myOutfit: $myOutfit)
+                            
+                            // Tops Category
+                            ClothesRowSelectorView(
+                                categoryName: Clothe.ClotheType.top.rawValue,
+                                subCategories: Clothe.ClotheType.top.subCategoriesOnly(),
+                                selectedSubCategory: Clothe.ClotheType.Top.tShirt.rawValue,
+                                action: {}, myOutfit: $myOutfit
+                            )
+                            
+                            // Bottoms Category
+                            ClothesRowSelectorView(
+                                categoryName: Clothe.ClotheType.bottom.rawValue,
+                                subCategories: Clothe.ClotheType.bottom.subCategoriesOnly(),
+                                selectedSubCategory: Clothe.ClotheType.Bottom.jeans.rawValue,
+                                action: {}, myOutfit: $myOutfit
+                            )
+                            
+                            // Footwear Category
+                            ClothesRowSelectorView(
+                                categoryName: Clothe.ClotheType.footwear.rawValue,
+                                subCategories: Clothe.ClotheType.footwear.subCategoriesOnly(),
+                                selectedSubCategory: Clothe.ClotheType.Footwear.sneakers.rawValue,
+                                action: {}, myOutfit: $myOutfit
+                            )
+                            
+                            // Accessories Category
+                            ClothesRowSelectorView(
+                                categoryName: Clothe.ClotheType.accessories.rawValue,
+                                subCategories: Clothe.ClotheType.accessories.subCategoriesOnly(),
+                                selectedSubCategory: Clothe.ClotheType.Accessory.necklace.rawValue,
+                                action: {}, myOutfit: $myOutfit
+                            )
+                            
+                            // Outerwear Category
+                            ClothesRowSelectorView(
+                                categoryName: Clothe.ClotheType.outerwear.rawValue,
+                                subCategories: Clothe.ClotheType.outerwear.subCategoriesOnly(),
+                                selectedSubCategory: Clothe.ClotheType.Outerwear.hoodies.rawValue,
+                                action: {}, myOutfit: $myOutfit
+                            )
+                            
+                            // Dresses Category
+                            ClothesRowSelectorView(
+                                categoryName: Clothe.ClotheType.dresses.rawValue,
+                                subCategories: Clothe.ClotheType.dresses.subCategoriesOnly(),
+                                selectedSubCategory: Clothe.ClotheType.Dress.maxi.rawValue,
+                                action: {}, myOutfit: $myOutfit
+                            )
+                            /*ClothesRowSelectorView(categoryName: "Tops", subCategories: ["T-Shirts", "Jackets", "Coats", "Sweaters", "Hoodies", "Shirts", "Blouses"], selectedSubCategory: "T-Shirts", action: {}, myOutfit: $myOutfit)
                             
                             ClothesRowSelectorView(categoryName: "Bottom", subCategories: ["Jeans", "Shorts", "Skirts", "Leggings"], selectedSubCategory: "Jeans", action: {}, myOutfit: $myOutfit)
                             
                             ClothesRowSelectorView(categoryName: "Footwear", subCategories: ["Sneakers"], selectedSubCategory: "Sneakers", action: {}, myOutfit: $myOutfit)
                             
-                            ClothesRowSelectorView(categoryName: "Accessories", subCategories: ["Necklace", "Earrings", "Bracelet", "Watch", "Glasses"], selectedSubCategory: "Necklace", action: {}, myOutfit: $myOutfit)
+                            ClothesRowSelectorView(categoryName: "Accessories", subCategories: ["Necklace", "Earrings", "Bracelet", "Watch", "Glasses"], selectedSubCategory: "Necklace", action: {}, myOutfit: $myOutfit)*/
                         }
                     }
                     .padding(.bottom, 100)

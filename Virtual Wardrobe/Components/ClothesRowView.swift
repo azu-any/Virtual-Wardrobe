@@ -21,7 +21,7 @@ struct ClothesRowView: View {
         var count = 0
         
         for clothe in clothes{
-            if subCategories.contains(clothe.type.rawValue){
+            if subCategories.contains(clothe.subType){
                 count += 1
             }
         }
@@ -63,7 +63,7 @@ struct ClothesRowView: View {
                     ScrollView(.horizontal, showsIndicators: false){
                         HStack{
                             ForEach(clothes){ clothe in
-                                if selectedSubCategory == clothe.type.rawValue{
+                                if selectedSubCategory == clothe.subType{
                                     NavigationLink {
                                         ClotheDetailView(clothe: clothe)
                                     } label: {

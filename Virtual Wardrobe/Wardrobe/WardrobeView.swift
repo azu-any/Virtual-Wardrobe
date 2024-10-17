@@ -29,7 +29,7 @@ struct WardrobeView: View {
                             // Tops Category
                             ClothesRowView(
                                 categoryName: Clothe.ClotheType.top.rawValue,
-                                subCategories: Clothe.ClotheType.allCases.map { $0.rawValue },
+                                subCategories: Clothe.ClotheType.top.subCategoriesOnly(),
                                 selectedSubCategory: Clothe.ClotheType.Top.tShirt.rawValue,
                                 action: {}
                             )
@@ -37,7 +37,7 @@ struct WardrobeView: View {
                             // Bottoms Category
                             ClothesRowView(
                                 categoryName: Clothe.ClotheType.bottom.rawValue,
-                                subCategories: Clothe.ClotheType.allCases.map { $0.rawValue },
+                                subCategories: Clothe.ClotheType.bottom.subCategoriesOnly(),
                                 selectedSubCategory: Clothe.ClotheType.Bottom.jeans.rawValue,
                                 action: {}
                             )
@@ -45,7 +45,7 @@ struct WardrobeView: View {
                             // Footwear Category
                             ClothesRowView(
                                 categoryName: Clothe.ClotheType.footwear.rawValue,
-                                subCategories: Clothe.ClotheType.Footwear.allCases.map { $0.rawValue },
+                                subCategories: Clothe.ClotheType.footwear.subCategoriesOnly(),
                                 selectedSubCategory: Clothe.ClotheType.Footwear.sneakers.rawValue,
                                 action: {}
                             )
@@ -53,7 +53,7 @@ struct WardrobeView: View {
                             // Accessories Category
                             ClothesRowView(
                                 categoryName: Clothe.ClotheType.accessories.rawValue,
-                                subCategories: Clothe.ClotheType.Accessory.allCases.map { $0.rawValue },
+                                subCategories: Clothe.ClotheType.accessories.subCategoriesOnly(),
                                 selectedSubCategory: Clothe.ClotheType.Accessory.necklace.rawValue,
                                 action: {}
                             )
@@ -61,7 +61,7 @@ struct WardrobeView: View {
                             // Outerwear Category
                             ClothesRowView(
                                 categoryName: Clothe.ClotheType.outerwear.rawValue,
-                                subCategories: Clothe.ClotheType.Outerwear.allCases.map { $0.rawValue },
+                                subCategories: Clothe.ClotheType.outerwear.subCategoriesOnly(),
                                 selectedSubCategory: Clothe.ClotheType.Outerwear.hoodies.rawValue,
                                 action: {}
                             )
@@ -69,7 +69,7 @@ struct WardrobeView: View {
                             // Dresses Category
                             ClothesRowView(
                                 categoryName: Clothe.ClotheType.dresses.rawValue,
-                                subCategories: Clothe.ClotheType.Dress.allCases.map { $0.rawValue },
+                                subCategories: Clothe.ClotheType.dresses.subCategoriesOnly(),
                                 selectedSubCategory: Clothe.ClotheType.Dress.maxi.rawValue,
                                 action: {}
                             )
@@ -119,7 +119,7 @@ struct WardrobeView: View {
             .padding(.top)
             .navigationTitle("Wardrobe")
         }
-        
+
         .sheet(isPresented: $showAddClothesView, content: {AddClothesView(showAddClothesView: $showAddClothesView)})
     }
     

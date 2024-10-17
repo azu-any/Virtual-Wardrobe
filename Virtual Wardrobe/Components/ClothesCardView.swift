@@ -22,7 +22,6 @@ struct ClothesCardView: View {
                 .resizable()
                 .scaledToFit()
                 .padding(5)
-                //.frame(height: 60)
         }
         .frame(width: size, height: size)
         .padding(2)

@@ -103,7 +103,7 @@ struct AddClothesView: View {
                         // Picker for selecting subcategories based on the selected category
                         Picker("Subcategory", selection: $selectedSubCategory) {
                             ForEach(selectedCategory.subcategories(), id: \.0) { subcategory, _ in
-                                Text(" \(subcategory)").tag(subcategory)
+                                Text(subcategory).tag(subcategory)
                             }
                         }
                     }
@@ -141,11 +141,11 @@ struct AddClothesView: View {
                     
                     if image_data.count > 0{
                         let newClothe = Clothe(image: image_data, hexColor: color.hex, type: selectedCategory, subType: selectedSubCategory)
-                        
-                        
+                        print("New clothe: \(newClothe)")
+                        print("\(newClothe.type) \(newClothe.subType)")
                         
                         context.insert(newClothe)
-                        try? context.save()
+                        // try? context.save()
                         
                         mode.wrappedValue.dismiss()
                     }
