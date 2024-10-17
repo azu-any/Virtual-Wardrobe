@@ -12,6 +12,7 @@ struct StyleGeneratedView: View {
     @State var clothes = []
     @Binding var generateOutfit: Bool
     @Binding var showingSheet: Bool
+    let generatedClothes: [Clothe]
     
     var body: some View {
         
@@ -21,9 +22,19 @@ struct StyleGeneratedView: View {
                 .font(.title2.bold())
             
             VStack(){
-                HStack{
-                    
-                }
+        
+                    ScrollView(.horizontal){
+                        HStack{
+                            ForEach(generatedClothes){ clothe in
+                                Image(uiImage: UIImage(data: clothe.image ?? Data())!)
+                                    .resizable()
+                                    .frame(width: 150, height: 150)
+                                    .scaledToFit()
+                                    .padding(5)
+                            }
+                        }
+                    }
+                
                 
                 HStack{
                     
@@ -54,5 +65,5 @@ struct StyleGeneratedView: View {
 
 #Preview {
     StyleGeneratedView(generateOutfit: .constant(true),
-        showingSheet: .constant(true))
+                       showingSheet: .constant(true), generatedClothes: [])
 }

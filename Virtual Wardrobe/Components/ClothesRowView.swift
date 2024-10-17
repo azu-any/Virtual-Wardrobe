@@ -71,7 +71,6 @@ struct ClothesRowView: View {
                                             .contextMenu {
                                                 Button(role: .destructive){
                                                     context.delete(clothe)
-                                                    try? context.save()
                                                 } label: {
                                                     Label("Delete Clothe", systemImage: "xmark.circle")
                                                 }

@@ -123,6 +123,8 @@ struct WardrobeView: View {
         .sheet(isPresented: $showAddClothesView, content: {AddClothesView(showAddClothesView: $showAddClothesView)})
     }
     
+
+    
 }
 
 #Preview {
