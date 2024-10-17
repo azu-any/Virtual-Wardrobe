@@ -24,10 +24,6 @@ struct WardrobeSelectorView: View {
         _selectedDay = selectedDay
         
         _myOutfit = State(initialValue: outfit ?? Outfit(clothes: [], createdDate: selectedDay.wrappedValue))
-        
-        if outfit != nil{
-            context.delete(outfit!)
-        }
     }
     
     
