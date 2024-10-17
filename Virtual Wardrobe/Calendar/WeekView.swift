@@ -95,7 +95,7 @@ public struct WeekView: View {
         }
         .sheet(isPresented: $showDatePicker) {
             DatePicker("", selection: $selectedDay, displayedComponents: .date)
-                .labelsHidden() // Hides the default label
+                .labelsHidden()
                 .foregroundColor (.main)
                 .datePickerStyle(GraphicalDatePickerStyle())
                 .font(.title3)

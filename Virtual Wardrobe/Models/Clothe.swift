@@ -18,6 +18,9 @@ class Clothe {
     var type: String
     var timesUsed: Int = 0
     
+    // Relationship to Outfit
+    @Relationship(deleteRule: .nullify, inverse: \Outfit.clothes)var outfits: [Outfit] = []// Inverse relationship
+    
     init(image: Data? = nil, hexColor: String, type: String) {
         self.image = image
         self.hexColor = hexColor
