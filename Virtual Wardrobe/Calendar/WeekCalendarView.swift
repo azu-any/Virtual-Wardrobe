@@ -37,9 +37,6 @@ public struct WeekCalendarView<Content: View>: View {
         
     public var body: some View {
         VStack{
-            Text(selectedDay.formatted(date: .long, time: .omitted))
-                .font(.title.bold())
-                .padding(.top, 10)
             
             
             TabView(selection: $activeTab) {

@@ -20,34 +20,55 @@ struct CalendarView: View {
 
     var body: some View {
         NavigationStack{
-            
-            VStack(alignment: .center){
                 
-                WeekCalendarView(selectedDay: $selectedDay)
-                    .frame(height: 180)
-                
-                ScrollView{
+            ScrollView{
+                    
+                VStack(alignment: .center){
+                    
+                    WeekCalendarView(selectedDay: $selectedDay)
+                        .frame(height: 180)
+                        //s.padding(.bottom, 1)
+                    
                     if let myOutfit = outfitForSelectedDay() {
                         
                         if !myOutfit.clothes.isEmpty {
                             
+                            Text("Outfit of \(selectedDay.formatted(date: .long, time: .omitted))")
+                                .font(.title2)
+                                .padding(.top, 10)
+                            
                             ScrollView(.horizontal, showsIndicators: false){
+                                
+                                Spacer()
+                                    .containerRelativeFrame(.horizontal)
                                 
                                 HStack(alignment: .center, spacing: 10){
                                     
-                                    Spacer()
+                                    
                                     
                                     ForEach(myOutfit.clothes) { clothe in
-                                        
-                                        ClothesCardView(clothe: clothe, size: 120)
+                                        NavigationLink {
+                                            ClotheDetailView(clothe: clothe)
+                                        } label: {
+                                            ClothesCardView(clothe: clothe, size: 120)
+                                            .contextMenu {
+                                                
+                                                Button{
+                                                    isEditing = true
+                                                } label: {
+                                                    Label("Edit Outfit", systemImage: "pencil.circle")
+                                                }
+                                            }
+                                        }
                                     }
-                                    .onTapGesture {
-                                        isEditing = true
-                                    }
                                         
-                                    Spacer()
                                 }
+                                
+                                
                             }
+                            .scrollBounceBehavior(.basedOnSize)
+                            .padding(.bottom, 20)
+                            
                             
                             Text("Mood tracker")
                                 .font(.title.bold())
@@ -95,7 +116,7 @@ struct CalendarView: View {
                     Button(action: {
                         outfitForSelectedDay()?.selectedEmotion = emotion
                     }) {
-                        Text(emotion == 1 ? "🙂" : emotion == 2 ? "😐" : "🙁")
+                        Text(emotion == 1 ? "🙁" : emotion == 2 ? "😐" : "🙂")
                             .padding(10)
                             .font(.system(size: 64))
                             .background(outfitForSelectedDay()?.selectedEmotion == emotion ? Color.main : Color.clear)
