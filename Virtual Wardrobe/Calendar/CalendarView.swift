@@ -68,6 +68,7 @@ struct CalendarView: View {
                             }
                             .scrollBounceBehavior(.basedOnSize)
                             .padding(.bottom, 20)
+                            .padding(.leading)
                             
                             
                             Text("Mood tracker")
