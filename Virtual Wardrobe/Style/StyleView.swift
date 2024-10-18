@@ -64,7 +64,7 @@ struct StyleView: View {
                     Button(action: {
                         generateOutfit = true
                         self.generatedClothes = nil
-                        self.generatedClothes = generateRandomOutfit()
+                        self.generatedClothes = generateRandomOutfit(isAccessoriesToggled: isToggled)
                         
                     }){
                         Label("Generate again", systemImage: "arrow.trianglehead.2.clockwise")
@@ -92,7 +92,7 @@ struct StyleView: View {
                     Button(action: {
                         generatedClothes = []
                         generateOutfit = true
-                        generatedClothes = generateRandomOutfit()
+                        generatedClothes = generateRandomOutfit(isAccessoriesToggled: isToggled)
                     }) {
                         Text("Outfit Me")
                     }
@@ -106,8 +106,6 @@ struct StyleView: View {
                             .padding(.horizontal, 40)
                             .foregroundColor(.gray)
                     }
-                .sheet(isPresented: $generateOutfit, content: {
-                    StyleGeneratedView(generateOutfit: $generateOutfit, showingSheet: $showingSheet, generatedClothes: generatedClothes ?? [])})
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 }
             
@@ -136,7 +134,6 @@ struct StyleView: View {
             for clothe in clothes{
                 if category.contains(clothe.subType){
                     dict["Top"]?.append(clothe)
-                    print("here")
                 }
             }
         }
@@ -145,7 +142,6 @@ struct StyleView: View {
             for clothe in clothes{
                 if category.contains(clothe.subType){
                     dict["Bottom"]?.append(clothe)
-                    print("here")
                 }
             }
         }
@@ -154,7 +150,6 @@ struct StyleView: View {
             for clothe in clothes{
                 if category.contains(clothe.subType){
                     dict["Footwear"]?.append(clothe)
-                    print("here")
                 }
             }
         }
@@ -163,7 +158,6 @@ struct StyleView: View {
             for clothe in clothes{
                 if category.contains(clothe.subType){
                     dict["Accessory"]?.append(clothe)
-                    print("here")
                 }
             }
         }
@@ -171,7 +165,7 @@ struct StyleView: View {
         return dict
     }
     
-    func generateRandomOutfit() -> [Clothe]? {
+    func generateRandomOutfit(isAccessoriesToggled: Bool) -> [Clothe]? {
             var selectedOutfit: [Clothe] = []
             
             if let dict = dict {
@@ -188,8 +182,10 @@ struct StyleView: View {
                     selectedOutfit.append(randomFootwear)
                 }
                 
-                if let accessoryItems = dict["Accessory"], let randomAccessory = accessoryItems.randomElement() {
-                    selectedOutfit.append(randomAccessory)
+                if isAccessoriesToggled{
+                    if let accessoryItems = dict["Accessory"], let randomAccessory = accessoryItems.randomElement() {
+                        selectedOutfit.append(randomAccessory)
+                    }
                 }
             }
             

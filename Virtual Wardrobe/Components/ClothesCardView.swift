@@ -16,7 +16,7 @@ struct ClothesCardView: View {
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 23)
-                .fill(isSelected ? Color.main : .white)
+                .fill(Color.main.opacity(0.3))
             
             Image(uiImage: UIImage(data: clothe.image ?? Data())!)
                 .resizable()
